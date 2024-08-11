@@ -13,42 +13,41 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col my-5">
-            <h2 class="text-center mb-5">Here are your todos, Stay Organized . . .</h2>
-            <div class="card">
-                <div class="card-header">
-                    {{ todo.title }}
+    <div class="row justify-content-center">
+        <div class="col-md-8 my-5">
+            <h2 class="text-center mb-4">Here are your todos, Stay Organized . . .</h2>
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{ todo.title }}</h4>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         {% if todo.priority == 'H' %}
-                        <span class="badge badge-success">High</span>
+                        <span class="badge badge-danger">High</span>
                         {% elif todo.priority == 'M' %}
                         <span class="badge badge-warning">Medium</span>
                         {% elif todo.priority == 'L' %}
-                        <span class="badge badge-danger">Low</span>
+                        <span class="badge badge-success">Low</span>
                         {% else %}
                         <span class="badge badge-secondary">None</span>
                         {% endif %}
                     </h5>
                     <p class="card-text">{{ todo.description }}</p>
-                    <h6 class="card-title">{{ todo.date_created }}</h6>
-
-                    <a href="#" class="btn btn-primary">
+                    <h6 class="card-subtitle mb-2 text-muted">{{ todo.date_created }}</h6>
+                    <a href="#" class="btn btn-outline-primary">
                         {% if todo.completed %}
                         Mark as Not Completed
                         {% else %}
                         Mark as Completed
                         {% endif %}
                     </a>
-                    <br><br>
-                    <p class="card-text"><a href="{% url 'index' %}">Back home</a>
+                    <div class="mt-3">
+                        <a href="{% url 'index' %}" class="text-primary">Back home</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

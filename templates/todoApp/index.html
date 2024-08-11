@@ -41,7 +41,7 @@
                 </td>
                 <td>{{ todo.date_created|date }}</td>
                 <td>
-                    <input type="checkbox" {% if todo.completed %} checked {% endif %} disabled>
+                    <input type="checkbox" class="checkbox-btn" {% if todo.completed %} checked {% endif %} disabled>
                 </td>
                 {% if todo.priority == 'H' %}
                 <td><span class="badge badge-success">High</span></td>
@@ -53,13 +53,13 @@
                 <td><span class="badge badge-secondary">None</span></td>
                 {% endif %}
                 <td>
-                    <a href="{% url 'index' %}">
-                        <i class="bi bi-pencil-square fill"></i>
+                    <a href="{% url 'update_todo' id=todo.id %}">
+                        <i class="bi bi-pencil-square btn btn-success"></i>
                     </a>
                 </td>
                 <td>
                     <a href="{% url 'delete_todo' id=todo.id %}">
-                        <i class="bi bi-trash3-fill"></i>
+                        <i class="bi bi-trash3-fill btn btn-danger"></i>
                     </a>
                 </td>
             </tr>

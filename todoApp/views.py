@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import TodoModel
@@ -24,7 +25,17 @@ def create_todo(request):
 
 
 def update_todo(request, id):
-    return render(request, 'todoApp/update.html')
+    todo = get_object_or_404(TodoModel, pk=id)
+
+    if request.method == 'POST':
+        todo.title = request.POST.get('title')
+        todo.description = request.POST.get('description')
+        todo.priority = request.POST.get('priority')
+        todo.completed = 'completed' in request.POST
+        todo.save()
+        return redirect('index')
+
+    return render(request, 'todoApp/update_todo.html', {'todo': todo})
 
 
 def delete_todo(request, id):
