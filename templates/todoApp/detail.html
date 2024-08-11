@@ -23,13 +23,13 @@
                 <div class="card-body">
                     <h5 class="card-title">
                         {% if todo.priority == 'H' %}
-                        <td><span class="badge badge-success">High</span></td>
+                        <span class="badge badge-success">High</span>
                         {% elif todo.priority == 'M' %}
-                        <td><span class="badge badge-warning">Medium</span></td>
+                        <span class="badge badge-warning">Medium</span>
                         {% elif todo.priority == 'L' %}
-                        <td><span class="badge badge-danger">Low</span></td>
+                        <span class="badge badge-danger">Low</span>
                         {% else %}
-                        <td><span class="badge badge-secondary">None</span></td>
+                        <span class="badge badge-secondary">None</span>
                         {% endif %}
                     </h5>
                     <p class="card-text">{{ todo.description }}</p>

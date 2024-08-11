@@ -88,3 +88,37 @@ h1,h2,h3,h4,h5,h6 {
 	}
 
 }
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #000; /* Border color */
+    border-radius: 4px;
+    position: relative;
+    cursor: not-allowed; /* Show it's unmodifiable */
+}
+
+/* Checked state */
+input[type="checkbox"]:checked {
+    background-color: #4CAF50; /* Green background for checked state */
+    border-color: #4CAF50;
+}
+
+/* Add a tick mark */
+input[type="checkbox"]:checked::after {
+    content: '✔';
+    position: absolute;
+    left: 4px;
+    top: -2px;
+    color: white;
+    font-size: 14px;
+}
+
+/* Optional: add some focus styling */
+input[type="checkbox"]:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px rgba(100, 100, 100, 0.5);
+}
