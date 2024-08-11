@@ -30,7 +30,11 @@
                 {% for todo in todos %}
                 <tr>
                     <th scope="row">{{ todo.id }}</th>
-                    <td>{{ todo.title }}</td>
+                    <td>
+                        <a href="{% url 'detail' todo.id %}">
+                            {{ todo.title }}
+                        </a>
+                    </td>
                     <td>{{ todo.date_created|date }}</td>
                     <td>{{ todo.completed }}</td>
                     {% if todo.priority == 'H' %}

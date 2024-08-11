@@ -13,3 +13,11 @@ def index(request):
 
 def todos(request):
     return render(request, 'todoApp/todos.html')
+
+
+def detail(request, id):
+    todo = TodoModel.objects.get(id=id)
+    context = {
+        'todo': todo
+    }
+    return render(request, 'todoApp/detail.html', context)
