@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import TodoModel
 
@@ -21,14 +21,22 @@ class ViewTodo(ListView):
 #     }
 #     return render(request, 'todoApp/index.html', context)
 
+class DetailTodo(DetailView):
+    model = TodoModel
+    template_name = 'todoApp/detail.html'
+
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context = super(DetailTodo, self).get_context_data(*args, **kwargs)
+        context['todo'] = TodoModel.objects.get(id=self.kwargs['pk'])
+        return context
 
 
-def detail_todo(request, id):
-    todo = TodoModel.objects.get(id=id)
-    context = {
-        'todo': todo
-    }
-    return render(request, 'todoApp/detail.html', context)
+# def detail_todo(request, id):
+#     todo = TodoModel.objects.get(id=id)
+#     context = {
+#         'todo': todo
+#     }
+#     return render(request, 'todoApp/detail.html', context)
 
 
 def create_todo(request):
