@@ -21,7 +21,21 @@ def detail_todo(request, id):
 
 
 def create_todo(request):
-    return render(request, 'todoApp/create.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        priority = request.POST.get('priority')
+        completed = 'completed' in request.POST
+
+        # Create and save the new todo item
+        todo = TodoModel(title=title, description=description, priority=priority, completed=completed)
+        todo.save()
+
+        # Redirect to the main todo list page after saving
+        return redirect('index')
+
+    # If not a POST request, render the create todo modal template
+    return render(request, 'todoApp/create_todo.html')
 
 
 def update_todo(request, id):

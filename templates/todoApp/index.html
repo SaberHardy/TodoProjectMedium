@@ -18,6 +18,9 @@
 <div class="row mx-5">
     <div class="col my-5">
         <h2 class="text-center mb-5">Here are your todos, Stay Organized . . .</h2>
+<!--        add a href button to create a new todo and put it in the middle-->
+        <a href="{% url 'create_todo' %}" class="btn btn-primary mb-3 btn-lg btn-block ">Add New Todo</a>
+<!--add shadow to the table -->
         <table class="table">
             <thead>
             <tr>
@@ -44,13 +47,13 @@
                     <input type="checkbox" class="checkbox-btn" {% if todo.completed %} checked {% endif %} disabled>
                 </td>
                 {% if todo.priority == 'H' %}
-                <td><span class="badge badge-success">High</span></td>
+                <td><span class="badge badge-danger">High</span></td>
                 {% elif todo.priority == 'M' %}
-                <td><span class="badge badge-warning">Medium</span></td>
+                <td><span class="badge badge-info">Medium</span></td>
                 {% elif todo.priority == 'L' %}
-                <td><span class="badge badge-danger">Low</span></td>
+                <td><span class="badge badge-success">Low</span></td>
                 {% else %}
-                <td><span class="badge badge-secondary">None</span></td>
+                <td><span class="badge badge-info">None</span></td>
                 {% endif %}
                 <td>
                     <a href="{% url 'update_todo' id=todo.id %}">
