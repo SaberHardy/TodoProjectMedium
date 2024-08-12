@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import TodoForm
 from .models import TodoModel
@@ -37,7 +38,7 @@ class UpdateTodo(UpdateView):
     template_name = 'todoApp/update_todo.html'
 
 
-def delete_todo(request, id):
-    todo = get_object_or_404(TodoModel, id=id)
-    todo.delete()
-    return redirect('index')
+class DeleteTodo(DeleteView):
+    model = TodoModel
+    template_name = 'todoApp/delete_todo.html'
+    success_url = reverse_lazy('index')
