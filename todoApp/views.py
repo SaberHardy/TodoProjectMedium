@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from .forms import TodoForm
 from .models import TodoModel
@@ -31,18 +31,10 @@ class CreateTodo(CreateView):
     template_name = 'todoApp/create_todo.html'
 
 
-def update_todo(request, id):
-    todo = get_object_or_404(TodoModel, pk=id)
-
-    if request.method == 'POST':
-        todo.title = request.POST.get('title')
-        todo.description = request.POST.get('description')
-        todo.priority = request.POST.get('priority')
-        todo.completed = 'completed' in request.POST
-        todo.save()
-        return redirect('index')
-
-    return render(request, 'todoApp/update_todo.html', {'todo': todo})
+class UpdateTodo(UpdateView):
+    model = TodoModel
+    form_class = TodoForm
+    template_name = 'todoApp/update_todo.html'
 
 
 def delete_todo(request, id):

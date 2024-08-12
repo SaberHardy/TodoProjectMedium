@@ -3,40 +3,15 @@
 {% block content %}
 <div class="container">
     <div class="form-container">
-        <h1>Update Todo</h1>
-
-        <form method="POST" class="update-form">
-            {% csrf_token %}
-
-            <div class="form-group">
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" value="{{ todo.title }}" required>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="4" cols="50">{{ todo.description }}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="priority">Priority:</label>
-                <select id="priority" name="priority" required>
-                    <option value="H" {% if todo.priority == 'H' %}selected{% endif %}>High</option>
-                    <option value="M" {% if todo.priority == 'M' %}selected{% endif %}>Medium</option>
-                    <option value="L" {% if todo.priority == 'L' %}selected{% endif %}>Low</option>
-                    <option value="N" {% if todo.priority == 'N' %}selected{% endif %}>None</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="completed">Completed:</label>
-                <input type="checkbox" id="completed" name="completed" {% if todo.completed %}checked{% endif %}>
-            </div>
-
-            <button type="submit" class="btn-primary">Update Todo</button>
-        </form>
-
-        <a href="{% url 'index' %}" class="back-link">Back to Todo List</a>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update New Todo</h1>
+        <div class="form-container">
+            <form method="POST" class="create-form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Update Todo</button>
+                <a href="{% url 'index' %}" class="btn btn-primary">Back to Todo List</a>
+            </form>
+        </div>
     </div>
 </div>
 
