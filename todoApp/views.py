@@ -1,15 +1,26 @@
-from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
 
 from .models import TodoModel
 
 
-def index(request):
-    todos = TodoModel.objects.all()
-    context = {
-        'todos': todos
-    }
-    return render(request, 'todoApp/index.html', context)
+class ViewTodo(ListView):
+    model = TodoModel
+    template_name = 'todoApp/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['todos'] = TodoModel.objects.all()
+        return context
+
+
+# def index(request):
+#     todos = TodoModel.objects.all()
+#     context = {
+#         'todos': todos
+#     }
+#     return render(request, 'todoApp/index.html', context)
+
 
 
 def detail_todo(request, id):
