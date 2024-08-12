@@ -1,54 +1,43 @@
-{% load static %}
+{% extends 'todoApp/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Update Todo</title>
-</head>
-<body>
-    <div class="container">
-        <div class="form-container">
-            <h1>Update Todo</h1>
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h1>Update Todo</h1>
 
-            <form method="POST" class="update-form">
-                {% csrf_token %}
+        <form method="POST" class="update-form">
+            {% csrf_token %}
 
-                <div class="form-group">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" value="{{ todo.title }}" required>
-                </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="{{ todo.title }}" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" rows="4" cols="50">{{ todo.description }}</textarea>
-                </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" cols="50">{{ todo.description }}</textarea>
+            </div>
 
-                <div class="form-group">
-                    <label for="priority">Priority:</label>
-                    <select id="priority" name="priority" required>
-                        <option value="H" {% if todo.priority == 'H' %}selected{% endif %}>High</option>
-                        <option value="M" {% if todo.priority == 'M' %}selected{% endif %}>Medium</option>
-                        <option value="L" {% if todo.priority == 'L' %}selected{% endif %}>Low</option>
-                        <option value="N" {% if todo.priority == 'N' %}selected{% endif %}>None</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority" required>
+                    <option value="H" {% if todo.priority == 'H' %}selected{% endif %}>High</option>
+                    <option value="M" {% if todo.priority == 'M' %}selected{% endif %}>Medium</option>
+                    <option value="L" {% if todo.priority == 'L' %}selected{% endif %}>Low</option>
+                    <option value="N" {% if todo.priority == 'N' %}selected{% endif %}>None</option>
+                </select>
+            </div>
 
-                <div class="form-group">
-                    <label for="completed">Completed:</label>
-                    <input type="checkbox" id="completed" name="completed" {% if todo.completed %}checked{% endif %}>
-                </div>
+            <div class="form-group">
+                <label for="completed">Completed:</label>
+                <input type="checkbox" id="completed" name="completed" {% if todo.completed %}checked{% endif %}>
+            </div>
 
-                <button type="submit" class="btn-primary">Update Todo</button>
-            </form>
+            <button type="submit" class="btn-primary">Update Todo</button>
+        </form>
 
-            <a href="{% url 'index' %}" class="back-link">Back to Todo List</a>
-        </div>
+        <a href="{% url 'index' %}" class="back-link">Back to Todo List</a>
     </div>
-</body>
-</html>
+</div>
+
+{% endblock %}
