@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
+from .forms import TodoForm
 from .models import TodoModel
 
 
@@ -14,13 +15,6 @@ class ViewTodo(ListView):
         return context
 
 
-# def index(request):
-#     todos = TodoModel.objects.all()
-#     context = {
-#         'todos': todos
-#     }
-#     return render(request, 'todoApp/index.html', context)
-
 class DetailTodo(DetailView):
     model = TodoModel
     template_name = 'todoApp/detail.html'
@@ -31,30 +25,10 @@ class DetailTodo(DetailView):
         return context
 
 
-# def detail_todo(request, id):
-#     todo = TodoModel.objects.get(id=id)
-#     context = {
-#         'todo': todo
-#     }
-#     return render(request, 'todoApp/detail.html', context)
-
-
-def create_todo(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        priority = request.POST.get('priority')
-        completed = 'completed' in request.POST
-
-        # Create and save the new todo item
-        todo = TodoModel(title=title, description=description, priority=priority, completed=completed)
-        todo.save()
-
-        # Redirect to the main todo list page after saving
-        return redirect('index')
-
-    # If not a POST request, render the create todo modal template
-    return render(request, 'todoApp/create_todo.html')
+class CreateTodo(CreateView):
+    model = TodoModel
+    form_class = TodoForm
+    template_name = 'todoApp/create_todo.html'
 
 
 def update_todo(request, id):
