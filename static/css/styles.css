@@ -61,11 +61,6 @@ h1 {
         font-size: 1rem;
         color: $color-text;
     }
-
-    input[type="checkbox"] {
-        width: auto;
-        margin-right: $half-spacing-unit;
-    }
 }
 
 .btn-primary {
@@ -105,6 +100,40 @@ h1 {
 .table {
     width: 100%;
     border: 1px solid $color-form-highlight;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Added shadow */
-    border-radius: 8px; /* Optional: Add rounded corners */
+    box-shadow: 10px 1px 8px rgba(100, 10, 0, 0.5);
+    border-radius: 8px;
 }
+
+ input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #000; /* Border color */
+        border-radius: 4px;
+        position: relative;
+        cursor: not-allowed; /* Show it's unmodifiable */
+    }
+
+    /* Checked state */
+    input[type="checkbox"]:checked {
+        background-color: #4CAF50; /* Green background for checked state */
+        border-color: #4CAF50;
+    }
+
+    /* Add a tick mark */
+    input[type="checkbox"]:checked::after {
+        content: '✔';
+        position: absolute;
+        left: 4px;
+        top: -2px;
+        color: white;
+        font-size: 14px;
+    }
+
+    /* Optional: add some focus styling */
+    input[type="checkbox"]:focus {
+        outline: none;
+        box-shadow: 0 0 3px 2px rgba(100, 100, 100, 0.5);
+    }
